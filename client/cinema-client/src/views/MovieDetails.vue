@@ -23,7 +23,7 @@
         <p><strong>Rating: </strong>
             <span class="rating" v-if="this.movie.rating !== undefined">⭐ {{ this.movie.rating.toFixed(1) }}</span>
         </p>
-        <p>{{ this.movie.synopsis }}</p>
+        <!--<p>{{ this.movie.synopsis }}</p>-->
 
         <button @click="showTrailer()" class="trailer-button">Watch Trailer</button>
       </div>

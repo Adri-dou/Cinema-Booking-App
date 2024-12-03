@@ -51,14 +51,14 @@
         <template v-if="orders.length > 0">
           <template v-if="isLoggedIn">
             <p>Enjoy exclusive offers and discounts!</p>
-            <button class="checkout-button" @click="checkout">Checkout</button>
+            <button class="checkout-button" @click="checkout()">Checkout</button>
           </template>
           <template v-else>
             <p>
               <router-link to="/login" @click="menuVisible = false">Log in to enjoy offers and reductions</router-link>, or
               continue as a guest:
             </p>
-            <button class="checkout-button" @click="checkout">Checkout as Guest</button>
+            <button class="checkout-button" @click="checkout()">Checkout as Guest</button>
           </template>
         </template>
       </div>
@@ -76,9 +76,11 @@ export default {
     };
   },
   async created() {
-    const orders = localStorage.getItem("Order") || [];
-    if (orders.length > 0) {
-      orders.forEach((order) => {
+    // Update correctly from local storage
+    this.$store.commit("clearOrders");
+    const localorders = JSON.parse(localStorage.getItem("Order") || "[]");
+    if (localorders.length > 0) {
+      localorders.forEach((order) => {
         this.$store.commit("addOrder", order);
       });
     }
@@ -139,7 +141,6 @@ export default {
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s;
-  position: relative;
 }
 
 .bubble:hover {
@@ -153,8 +154,8 @@ export default {
 
 .order-count {
   position: absolute;
-  top: 5%;
-  right: 5%;
+  top: -0.5rem;
+  right: -0.5rem;
   background-color: red;
   color: white;
   font-size: 0.8rem;
@@ -202,6 +203,42 @@ export default {
   margin: 0.5rem 0;
 }
 
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu li {
+  margin: 0.5rem 0;
+}
+
+.menu a {
+  color: #f90;
+  text-decoration: none;
+}
+
+.menu a:hover {
+  text-decoration: underline;
+}
+
+.orders ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.orders li {
+  padding: 0.5rem;
+  border-bottom: 1px solid #555;
+}
+
+.food-items {
+  list-style: none;
+  padding-left: 1rem;
+  margin: 0;
+}
+
 .food-items li {
   display: flex;
   justify-content: space-between;
@@ -232,6 +269,7 @@ export default {
   transition: background-color 0.3s;
   margin-top: 1rem;
   width: 100%;
+  text-shadow: 1px 1px 2px black;
 }
 
 .checkout-button:hover {
