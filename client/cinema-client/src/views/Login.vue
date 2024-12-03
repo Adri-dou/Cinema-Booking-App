@@ -48,6 +48,9 @@ export default {
         // Save token to cookies
         //document.cookie = `authToken=${response.data.token}; path=/;`;
 
+        // Set email in store
+        this.$store.commit('setUser', this.email);
+
         // Redirect to Profile page
         this.$router.push('/profile');
       } catch (error) {

@@ -146,14 +146,21 @@
 }
 
 .book-now {
-  background-color: #f50;
-  color: white;
-  border: none;
-  padding: 10px 20px;
+  background-color: transparent;
+  color: orange;
+  border: 2px solid orange;
+  padding: 10px 30px;
   font-size: 1.2rem;
+  text-shadow: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   cursor: pointer;
-  border-radius: 5px;
-  text-shadow: 1px 1px 2px black;
+}
+
+.book-now:hover {
+  background-color: orange;
+  color: white;
+  border-color: orange;
 }
 
 .carousel-button {

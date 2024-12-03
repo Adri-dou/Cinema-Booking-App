@@ -9,7 +9,7 @@
     <!-- Menu -->
     <div class="menu" :class="{ visible: menuVisible }">
       <div class="user-info" v-if="isLoggedIn">
-        <p>Welcome, {{ user.email }}</p>
+        <p>Welcome, {{ user }}</p>
       </div>
       <div class="orders">
         <h3>Your Orders</h3>
@@ -21,7 +21,7 @@
                 <ul class="food-items">
                   <li v-for="food in groupedFood(order.items)" :key="food.id">
                     <span>{{ food.quantity }}x {{ food.name }}</span>
-                    <span>- ${{ (food.quantity * food.price).toFixed(2) }}</span>
+                    <span> ${{ (food.quantity * food.price) }}</span>
                   </li>
                 </ul>
               </template>
@@ -90,12 +90,9 @@ export default {
     ...mapGetters(["orderCount", "isLoggedIn"]), // Map getters
   },
   methods: {
-    ...mapActions(["checkout", "loadUser"]), // Map Vuex actions
+    ...mapActions(["checkout"]), // Map Vuex actions
     toggleMenu() {
       this.menuVisible = !this.menuVisible;
-      if (this.menuVisible && this.isLoggedIn) {
-        this.loadUser(); // Load user data on menu open
-      }
     },
     groupedFood(items) {
       const grouped = {};
@@ -229,7 +226,7 @@ export default {
 }
 
 .orders li {
-  padding: 0.5rem;
+  padding: 0.5rem, 0;
   border-bottom: 1px solid #555;
 }
 

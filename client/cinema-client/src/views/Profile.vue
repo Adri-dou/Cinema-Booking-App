@@ -37,6 +37,7 @@
     methods: {
       logout() {
         localStorage.removeItem('authToken'); // Remove token
+        this.$store.commit('clearUser'); // Clear user state
         this.$router.push('/login'); // Redirect to login page
       },
     },

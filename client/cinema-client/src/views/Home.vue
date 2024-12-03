@@ -73,7 +73,7 @@ export default {
       this.$router.push(`/movies/${id}`);
     },
     scrollLeft(index) {
-      const list = this.$refs[`moviesList${index}`][0]; 
+      const list = this.$refs[`moviesList${index}`][0];
       if (list) {
         list.scrollBy({
           left: -300,
@@ -86,7 +86,7 @@ export default {
       if (list) {
         list.scrollBy({
           left: 300,
-          behavior: "smooth", 
+          behavior: "smooth",
         });
       }
     },
@@ -140,13 +140,12 @@ export default {
 }
 
 .movie-card {
-  width: 300px;
+  width: 17rem;
   flex-shrink: 0;
   text-align: center;
   cursor: pointer;
   border-radius: 5%;
-  transition: transform 0.2s ease;
-  transition: opacity 0.3s ease-in;
+  transition: opacity 0.3s ease-in, transform 0.2s ease;
   opacity: 1;
 }
 
@@ -202,26 +201,26 @@ export default {
 .see-more-container {
   margin-top: 10px;
   display: flex;
-  justify-content: flex-end; /* Align to the right */
-  padding-right: 20px; /* Add spacing from the right */
+  justify-content: flex-end;
+  padding-right: 20px;
 }
 
 .all-movies-button {
-  background-color: transparent; /* No background */
-  color: orange; /* Text in blue */
-  border: 2px solid orange; /* Blue border */
-  padding: 5px 10px; /* Smaller padding */
-  font-size: 0.9rem; /* Smaller font size */
+  background-color: transparent;
+  color: orange;
+  border: 2px solid orange;
+  padding: 5px 10px;
+  font-size: 0.9rem;
   text-decoration: none;
-  border-radius: 5px; /* Slightly rounded corners */
+  border-radius: 5px;
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   cursor: pointer;
 }
 
 .all-movies-button:hover {
-  background-color: orange; /* Orange background on hover */
-  color: white; /* White text on hover */
-  border-color: orange; /* Match border to background */
+  background-color: orange;
+  color: white;
+  border-color: orange;
 }
 
 </style>

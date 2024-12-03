@@ -17,7 +17,7 @@
       <ul>
         <li v-for="(item, index) in groupedOrder" :key="index">
           <span>{{ item.quantity }}x {{ item.name }}</span>
-          <span>- ${{ (item.price * item.quantity).toFixed(2) }} <button @click="removeFromOrder(item)" class="remove-button">-</button></span>
+          <span> ${{ (item.price * item.quantity).toFixed(2) }} <button @click="removeFromOrder(item)" class="remove-button">-</button></span>
         </li>
       </ul>
       <p class="total-price">Total: ${{ totalPrice }}</p>
@@ -234,11 +234,11 @@ export default {
   color: #fff;
   border: none;
   border-radius: 50%;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1rem;
+  height: 1rem;
   text-align: center;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 0.8rem;
   margin-left: 0.5rem;
   transition: background-color 0.3s ease;
 }
