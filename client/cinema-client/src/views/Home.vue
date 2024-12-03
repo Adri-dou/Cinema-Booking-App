@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <MovieCarousel class="carousel"/>
+    <MovieCarousel class="carousel" />
 
     <div class="genres-section">
       <div class="genre-row" v-for="(genre, index) in genres" :key="index">
@@ -23,12 +23,12 @@
 
           <button class="scroll-button next" @click="scrollRight(index)">&#10095;</button>
         </div>
+
+        <div class="see-more-container">
+          <router-link to="/movies" class="all-movies-button">See More</router-link>
+        </div>
       </div>
     </div>
-    <div class="all-movies-button-container">
-      <router-link to="/movies" class="all-movies-button">See More</router-link>
-    </div>
-
   </div>
 </template>
 
@@ -42,7 +42,6 @@ export default {
     MovieCarousel,
   },
   data() {
-
     return {
       movies: [],
       genres: [
@@ -200,78 +199,29 @@ export default {
   transition: opacity 0.3s ease-out;
   opacity: 0;
 }
-
-.all-movies-button-container {
+.see-more-container {
+  margin-top: 10px;
   display: flex;
-  justify-content: center;
-  margin-top: 20px;
+  justify-content: flex-end; /* Align to the right */
+  padding-right: 20px; /* Add spacing from the right */
 }
 
 .all-movies-button {
-  background-color: #f70;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1.2rem;
+  background-color: transparent; /* No background */
+  color: orange; /* Text in blue */
+  border: 2px solid orange; /* Blue border */
+  padding: 5px 10px; /* Smaller padding */
+  font-size: 0.9rem; /* Smaller font size */
   text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  text-shadow: 1px 1px 2px black;
+  border-radius: 5px; /* Slightly rounded corners */
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  cursor: pointer;
 }
 
 .all-movies-button:hover {
-  background-color: #f50;
-}
-
-.date-navigation {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 20px 0;
-}
-
-.nav-button {
-  background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
-  color: white;
-  border: none;
-  padding: 10px;
-  font-size: 1.5rem;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.nav-button:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-.nav-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.dates-container {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 0 20px;
-}
-
-.date {
-  font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.7);
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.date:hover {
-  color: white;
-}
-
-.date.active {
-  font-weight: bold;
-  color: white;
-  text-decoration: underline;
+  background-color: orange; /* Orange background on hover */
+  color: white; /* White text on hover */
+  border-color: orange; /* Match border to background */
 }
 
 </style>
