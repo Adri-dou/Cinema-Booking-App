@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
@@ -14,6 +13,15 @@ const userSchema = new mongoose.Schema({
     required: true,
     minlength: 6,
   },
+  bookedSessions: [
+    {
+      id: { type: String },
+      movieTitle: { type: String },
+      selectedSeats: { type: [String] },
+      dateTimeSession: { type: Date },
+      posterPath: { type: String },
+    },
+  ],
 });
 
 // Hash the password before saving

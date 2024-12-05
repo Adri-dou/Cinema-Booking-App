@@ -191,26 +191,6 @@ export default {
           return require("@/assets/seats/seat-available.png");
       }
     },
-
-    /*
-    async reserveSeats() {
-      try {
-        const selectedSeatIds = this.selectedSeats.map(s => s.id);
-        const response = await axios.post(`http://localhost:3000/api/sessions/${this.sessionId}/reserve`, {
-          seats: selectedSeatIds,
-        });
-
-        alert(response.data.message || "Seats reserved successfully!");
-        
-        // Update seat statuses after successful reservation
-        this.takenSeats.push(...selectedSeatIds);
-        this.selectedSeats.forEach(seat => (seat.status = "reserved"));
-        this.selectedSeats = [];
-      } catch (err) {
-        console.error("Failed to reserve seats:", err.response?.data || err);
-        alert(err.response?.data?.error || "Failed to reserve seats. Try again.");
-      }
-    },*/
   },
 };
 </script>

@@ -51,14 +51,14 @@
         <template v-if="orders.length > 0">
           <template v-if="isLoggedIn">
             <p>Enjoy exclusive offers and discounts!</p>
-            <button class="checkout-button" @click="checkout()">Checkout</button>
+            <button class="checkout-button" @click="userCheckout()">Checkout</button>
           </template>
           <template v-else>
             <p>
               <router-link to="/login" @click="menuVisible = false">Log in to enjoy offers and reductions</router-link>, or
               continue as a guest:
             </p>
-            <button class="checkout-button" @click="checkout()">Checkout as Guest</button>
+            <button class="checkout-button" @click="guestCheckout()">Checkout as Guest</button>
           </template>
         </template>
       </div>
@@ -90,7 +90,7 @@ export default {
     ...mapGetters(["orderCount", "isLoggedIn"]), // Map getters
   },
   methods: {
-    ...mapActions(["checkout"]), // Map Vuex actions
+    ...mapActions(["checkout", "saveUserOrders"]), // Map Vuex actions
     toggleMenu() {
       this.menuVisible = !this.menuVisible;
     },
@@ -114,6 +114,13 @@ export default {
       const date = new Date(dateTime);
       const options = { hour: "2-digit", minute: "2-digit" };
       return date.toLocaleTimeString(undefined, options);
+    },
+    userCheckout() {
+      this.saveUserOrders();
+      this.checkout();
+    },
+    guestCheckout() {
+      this.checkout();
     },
   },
 };
