@@ -27,13 +27,21 @@ const scheduleSessions = async () => {
             availableTime.getTime() + randomMovie.runtime * 60000
           );
 
-          if (sessionEnd > endTime) break;
+          // Adjust sessionEnd to round up to the nearest 15 minutes
+          const nextAvailableTime = new Date(sessionEnd);
+          nextAvailableTime.setMinutes(
+            Math.ceil(nextAvailableTime.getMinutes() / 15) * 15,
+            0,
+            0
+          );
+
+          if (nextAvailableTime > endTime) break;
 
           const overlappingSession = await Session.findOne({
             room,
             $or: [
-              { dateTime: { $lt: sessionEnd, $gte: availableTime } },
-              { endTime: { $gt: availableTime, $lte: sessionEnd } },
+              { dateTime: { $lt: nextAvailableTime, $gte: availableTime } },
+              { endTime: { $gt: availableTime, $lte: nextAvailableTime } },
             ],
           });
 
@@ -42,10 +50,11 @@ const scheduleSessions = async () => {
               room,
               movie: randomMovie._id,
               dateTime: availableTime,
+              endTime: sessionEnd, 
             });
           }
 
-          availableTime = sessionEnd; // Move to the next time slot
+          availableTime = nextAvailableTime;
         }
       }
     }

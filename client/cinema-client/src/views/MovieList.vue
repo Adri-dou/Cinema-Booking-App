@@ -1,7 +1,7 @@
 <template>
   <div class="movie-list">
 
-    <h1>Now Showing</h1>
+    <h1>🎥 Now Showing 🎥</h1>
     <div class="genre-filter">
       <label for="genre-select">Filter by Genre:</label>
       <select id="genre-select" v-model="selectedGenre" @change="filterMovies">
@@ -78,8 +78,13 @@ export default {
 
 }
 
+h1 {
+  margin-bottom: 3rem;
+  color: #f90;
+}
+
 .genre-filter {
-  margin: 1rem 0;
+  margin: 3rem 0;
 }
 
 .genre-filter label {
@@ -88,7 +93,7 @@ export default {
 
 .genre-filter select {
   color: white;
-  background-color: #333;
+  background-color: #222;
   border: 1px solid #333;
   border-radius: 0.25rem;
   padding: 0.5rem;

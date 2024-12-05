@@ -100,7 +100,7 @@ export default {
   display: flex;
   align-items: flex-start;
   gap: 2rem;
-  width: 40%;
+  width: 40rem;
   margin: auto;
   margin-top: 5%;
   padding: 1rem;
@@ -142,7 +142,6 @@ export default {
   font-weight: bold;
 }
 
-.reserve-button,
 .trailer-button {
   background-color: transparent;
   border: 2px solid #ffa500;
@@ -152,14 +151,13 @@ export default {
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
-  margin-right: 0.5rem;
   transition: all 0.3s ease-in-out;
   display: inline-flex;
   align-items: center;
+  margin: 2rem;
   gap: 0.5rem;
 }
 
-.reserve-button:hover,
 .trailer-button:hover {
   background-color: #ffa500;
   color: #000;

@@ -65,11 +65,11 @@ export default {
 <style scoped>
 .auth-form {
   max-width: 400px;
-  margin: 10% auto;
+  margin: 5% auto;
   background: #555;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
   text-align: center;
 }
 
@@ -97,7 +97,7 @@ export default {
 }
 
 .auth-form button {
-  background-color: #ff4500;
+  background-color: #f50;
   color: white;
   padding: 0.75rem 1.5rem;
   border: none;
@@ -107,7 +107,7 @@ export default {
 }
 
 .auth-form button:hover {
-  background-color: #e63e00;
+  background-color: #f90;
 }
 
 .auth-form p {
@@ -115,7 +115,7 @@ export default {
 }
 
 .auth-form a {
-  color: #ff4500;
+  color: #f50;
   text-decoration: none;
 }
 

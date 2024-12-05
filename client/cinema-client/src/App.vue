@@ -39,7 +39,7 @@ export default {
 }
 
 html {
-  font-size: 125%;
+  font-size: 140%;
 }
 
 body {

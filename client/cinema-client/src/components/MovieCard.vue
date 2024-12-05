@@ -28,7 +28,7 @@ export default {
 <style scoped>
 .movie-card {
   cursor: pointer;
-  background-color: #333;
+  background-color: rgba(20, 20, 20, 0.7);
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;

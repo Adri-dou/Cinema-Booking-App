@@ -68,6 +68,7 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from "vuex";
+import axios from "axios";
 
 export default {
   data() {
@@ -83,6 +84,17 @@ export default {
       localorders.forEach((order) => {
         this.$store.commit("addOrder", order);
       });
+    }
+    // Same for user
+    this.$store.commit("clearUser");
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      // Fetch user profile
+      const response = await axios.get('http://localhost:3000/api/auth/profile', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      this.$store.commit("setUser", response.data.user.email);
     }
   },
   computed: {
@@ -129,14 +141,14 @@ export default {
 <style scoped>
 .bubble-container {
   position: fixed;
-  bottom: 5%;
-  right: 5%;
+  bottom: 8%;
+  right: 8%;
   z-index: 3;
 }
 
 .bubble {
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   background-color: #f50;
   border-radius: 50%;
   display: flex;
@@ -254,7 +266,7 @@ export default {
 }
 
 .movie-poster img {
-  width: 70px;
+  width: 4rem;
   margin-right: 1rem;
 }
 

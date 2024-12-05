@@ -25,7 +25,7 @@
         </div>
 
         <div class="see-more-container">
-          <router-link to="/movies" class="all-movies-button">See More</router-link>
+          <router-link to="/movies" class="all-movies-button"><strong>See More</strong></router-link>
         </div>
       </div>
     </div>
