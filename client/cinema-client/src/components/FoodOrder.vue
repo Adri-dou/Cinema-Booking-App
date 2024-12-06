@@ -1,5 +1,6 @@
 <template>
   <div class="food-order">
+    <div class="background"></div>
     <h1 class="title">🍿 Cinema Snacks Order 🍫</h1>
     <div class="food-options">
       <div v-for="item in foodItems" :key="item.id" class="food-item">
@@ -8,7 +9,7 @@
           <h3>{{ item.name }}</h3>
           <p>{{ item.description }}</p>
           <p class="price">$ {{ item.price.toFixed(2) }}</p>
-          <button @click="addToOrder(item)" class="add-button">Add to Order</button>
+          <button @click="addToOrder(item)" class="add-button"><strong>Add to Order</strong></button>
         </div>
       </div>
     </div>
@@ -123,7 +124,19 @@ export default {
   padding: 2rem;
   position: relative;
   margin: 3rem 15%;
-  z-index: 1;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('@/assets/food/cinema-food-bg.png') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+  filter: blur(10px) brightness(20%);
+  z-index: -5;
 }
 
 .title {
@@ -142,11 +155,10 @@ export default {
 
 .food-item {
   text-align: center;
-  background: #333;
+  background: rgba(0, 0, 0, 0.5);
   border: 1px solid #444;
-  border-radius: 8px;
+  border-radius: 15px;
   padding: 1rem;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
   width: 220px;
   display: flex;
   flex-direction: column;
@@ -156,7 +168,7 @@ export default {
 
 .food-item:hover {
   transform: scale(1.05);
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 4px 8px rgba(250, 100, 0, 0.5);
 }
 
 .food-item img {
@@ -184,24 +196,27 @@ export default {
 }
 
 .add-button {
-  background-color: #ff6f00;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 4px;
+  background-color: transparent;
+  color: orange;
+  border: 2px solid orange;
+  padding: 5px 10px;
+  font-size: 0.7rem;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   cursor: pointer;
-  margin-top: auto;
-  transition: background-color 0.3s ease;
 }
 
 .add-button:hover {
-  background-color: #e65c00;
+  background-color: orange;
+  color: black;
+  border-color: orange;
 }
 
 .order-summary {
   margin-top: 2rem;
   text-align: center;
-  background: #333;
+  background: rgba(0, 0, 0, 0.5);
   border: 1px solid #444;
   padding: 1.5rem;
   border-radius: 8px;
@@ -248,22 +263,28 @@ export default {
 }
 
 .checkout-button {
-  background-color: #ff6f00;
-  color: #fff;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 4px;
+  background-color: transparent;
+  color: #f50;
+  border: 2px solid #f50;
+  font-size: 0.7rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
   margin-top: 1rem;
 }
 
 .checkout-button:disabled {
+  color: #ddd;
   background-color: #555;
   cursor: not-allowed;
+  border: none;
 }
 
 .checkout-button:hover:not(:disabled) {
-  background-color: #e65c00;
+  background-color: #f50;
+  color: black;
+  border-color: #f50;
 }
 </style>

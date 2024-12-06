@@ -59,10 +59,24 @@
       <p class="info">
         Selected seats:  <strong>{{ selectedSeats.map(s => s.id).join(", ") || "None" }}</strong>
       </p>
-      <button class="reserve-button" @click="saveOrderToLocalStorage()" :disabled="selectedSeats.length === 0">
+      <button class="reserve-button" @click="handleReserve()" :disabled="selectedSeats.length === 0">
         Reserve Seats
       </button>
     </div>
+
+    <!-- Popup -->
+    <div v-if="showPopup" class="popup-overlay">
+      <div class="popup">
+        <img src="@/assets/snacks-popup.png" alt="Snacks Offer" class="popup-image" />
+        <h2 class="popup-title">Enhance Your Experience!</h2>
+        <p class="popup-text">Order snacks to enjoy with your movie.</p>
+        <div class="popup-buttons">
+          <router-link to="/" class="popup-button reject-button">No, Thanks</router-link>
+          <router-link to="/order-food" class="popup-button accept-button">Order Snacks</router-link>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -79,6 +93,7 @@ export default {
       movieTitle: "",
       movieTagline: "",
       takenSeats: [],
+      showPopup: false, // State for showing the popup
     };
   },
   async created() {
@@ -153,7 +168,7 @@ export default {
       this.selectedSeats.forEach(seat => (seat.status = "reserved"));
       this.selectedSeats = [];
 
-      alert("Your order has been saved !");
+      //alert("Your order has been saved !");
     },
 
     initializeSeats(rows, cols) {
@@ -190,6 +205,10 @@ export default {
         default:
           return require("@/assets/seats/seat-available.png");
       }
+    },
+    handleReserve() {
+      this.saveOrderToLocalStorage();
+      this.showPopup = true; // Show popup after reserving seats
     },
   },
 };
@@ -286,5 +305,101 @@ export default {
 .reserve-button:disabled {
   background-color: #888;
   cursor: not-allowed;
+}
+
+/* Popup Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.5s ease;
+  z-index: 100;
+}
+
+.popup {
+  width: 30%;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  animation: popupScale 0.5s ease;
+}
+
+.popup-image {
+  width: 25vw;
+  margin: 0 auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.popup-title {
+  color: #f90;
+  font-size: 1.8rem;
+  margin: 1rem 0;
+}
+
+.popup-text {
+  color: #ddd;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+
+.popup-buttons {
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+.popup-button {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 2px solid #f90;
+  border-radius: 8px;
+  color: #f90;
+  text-decoration: none;
+  background: transparent;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.popup-button:hover {
+  background: #ffa500;
+  color: #222;
+  transform: scale(1.05);
+}
+
+.reject-button {
+  border-color: #ff4500;
+  color: #ff4500;
+}
+
+.reject-button:hover {
+  background: #ff4500;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popupScale {
+  from {
+    transform: scale(0.8);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 </style>
