@@ -13,8 +13,9 @@
             <img :src="`https://image.tmdb.org/t/p/w200${session.posterPath}`" :alt="session.movieTitle" />
             <div class="details">
               <h4>{{ session.movieTitle }}</h4>
-              <p><strong>Date:</strong> {{ formatDate(session.dateTimeSession) }}</p>
-              <p><strong>Seats:</strong> {{ session.selectedSeats.join(', ') }}</p>
+              <p><strong>Date : </strong> {{ formatDate(session.dateTimeSession) }}</p>
+              <p><strong>Time : </strong> {{ formatTime(session.dateTimeSession) }}</p>
+              <p><strong>Seats : </strong> {{ session.selectedSeats.join(', ') }}</p>
             </div>
           </li>
         </ul>

@@ -3,10 +3,9 @@
   <div id="app">
     <header>
       <div class="logo">
-        <router-link to="/">CineMaBaguette
-          <img src="@/assets/logo.png" alt="CineMaBaguette Logo" class="header-logo" />
-        </router-link>
+        <router-link to="/">CineMaBaguette</router-link>
       </div>
+      <SearchBar class="search-bar"/>
       <nav>
         <router-link to="/order-food">Snacks</router-link>
         <router-link to="/prices">Our Offers</router-link>
@@ -22,11 +21,13 @@
 
 <script>
 import BubbleMenu from './components/BubbleMenu.vue';
+import SearchBar from './components/SearchBar.vue';
 
 export default {
   name: 'App',
   components: {
     BubbleMenu,
+    SearchBar,
   },
 };
 </script>
@@ -100,7 +101,7 @@ nav a:hover {
   text-decoration: underline;
 }
 
-.header-logo {
+.search-bar {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);

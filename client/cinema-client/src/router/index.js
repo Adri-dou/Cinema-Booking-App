@@ -5,7 +5,7 @@ import MovieList from '../views/MovieList.vue';
 import MovieDetails from '../views/MovieDetails.vue';
 import FoodOrder from '../components/FoodOrder.vue';
 import Prices from '../components/Prices.vue';
-import SeatSelection from '../components/SeatSelection.vue';
+import SeatSelection from '../views/SeatSelection.vue';
 import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
 import Profile from '../views/Profile.vue';
