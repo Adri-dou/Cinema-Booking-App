@@ -1,111 +1,80 @@
-
 # Cinema Booking App
 
 A full-stack cinema booking web application that lets users browse movies, read details, make reservations, select seats, order food, and manage their user accounts. This app uses **Vue.js** on the frontend, **Node.js** with **Express** on the backend, and **MongoDB Atlas** as the database.
 
+---
+
 ## Features
 
-- **User Authentication**: Users can register and log in to manage reservations. (ToDo)
-- **Movie Search and Details**: Users can search for movies, view synopses, and read reviews. (ToDo)
-- **Seat Selection**: Dynamic seat selection for movie reservations. (missing backend)
-- **Food Ordering**: Add food items like popcorn, soda, and candy to the order. (same)
-- **Admin-Friendly**: Automatically pulls movie data daily when the server starts.
+- **User Authentication** : Users can register, log in, and manage their reservations.
+- **Movie Search and Details** : Users can search for movies, view synopses, and read reviews.
+- **Seat Selection** : Dynamic seat selection for movie reservations.
+- **Food Ordering** : Add food items like popcorn, soda, and candy to the order.
+- **Admin-Friendly** : Automatically pulls movie data daily when the server starts.
 
-## Project Structure
+---
+
+## Important Project Structure
 
 ```bash
 .
-.
 ├── .env                      # Environment variables
 ├── .gitignore
-├── README.md                 # Project documentation
+├── README.md                 # The file you're actually reading
 
 # Frontend
-├── client/cinema-client                    # Renamed for clarity
-│   ├── cinema-client
-│   │   ├── .gitignore
-│   │   ├── babel.config.js
-│   │   ├── package-lock.json
-│   │   ├── package.json
-│   │   ├── README.md
-│   │   └── vue.config.js
-│   │
-│   │── public                # Public assets
-│   │   ├── favicon.ico
-│   │   ├── index.html
-│   │   └── images            # Food and logo images
-│   │    
+├── client/cinema-client       # Vue.js frontend code
+│   ├── public...              # Public assets and html page
 │   │
 │   └── src
 │       ├── App.vue           # Main app component
 │       ├── main.js           # Entry file for Vue
-│       │
 │       ├── assets            # Dynamic component assets
-│       │   └── food          # Organize food images specifically
-│       │
-│       ├── components        # All reusable components
-│       │   ├── FoodOrder.vue
-│       │   ├── Login.vue
-│       │   ├── MovieCard.vue
-│       │   ├── MovieDetails.vue
-│       │   ├── MovieList.vue
-│       │   ├── Register.vue
-│       │   └── SeatSelection.vue
-│       │
+│       │   └── food          # Food-specific images
+│       ├── components        # Reusable components
 │       ├── router            # Vue Router configuration
-│       │   └── index.js
-│       │
 │       └── views             # Main views (pages)
-│           ├── Home.vue
-│           ├── Movie.vue
-│           └── Reservation.vue
+│    
 
 # Backend
 └── server
     ├── server.js             # Main server entry
     ├── fetchMovies.js        # Movie fetching script
+    ├── sessionScheduler.js   # Creating new sessions
     │
-    ├── models                # Mongoose models
-    │   ├── Movie.js
-    │   ├── RequestLog.js     # Log model to track requests
-    │   ├── Reservation.js
-    │   └── User.js
+    ├── models...             # Moodels for database
     │
-    ├── routes                # Express route handlers
-    │   ├── movies.js         # Routes for movie data
-    │   └── reservations.js   # Routes for reservations
+    ├── routes...             # Express route handlers
     │
-    └── controllers           # Controllers for business logic (ToDo)
-        ├── movieController.js
-        └── reservationController.js
-
+    └── controllers...        # Controllers for business logic
 ```
+
+---
 
 ## Getting Started
 
-### Prerequisites
+### Requirements
 
 Ensure you have the following installed:
 
 - **Node.js** (v14 or higher)
-- **MongoDB Atlas** (or local MongoDB instance)
+- **MongoDB Atlas** (or a local MongoDB instance)
 
 ### Setup Instructions
 
-1. **Clone the Repository**:
+1. **Clone the Repository** and go to the project's root :
    ```bash
    git clone https://github.com/Adri-dou/Cinema-Booking-App
    cd Cinema-Booking-App
    ```
 
 2. **Configure Environment Variables**:
-   Create a `.env` file in the project root to store your MongoDB URI.
-
+   Modify the `.env` file in the project root to store your MongoDB URI and Tmdb API key.
    ```bash
-    # .env
-    MONGODB_URI='your_mongodb_uri'
-    TMDB_API_KEY=your_tmdb_key
-    PORT=5000
+   # .env
+   MONGODB_URI=your_mongodb_uri
+   TMDB_API_KEY=your_tmdb_key
+   PORT=3000
    ```
 
 3. **Install Dependencies**:
@@ -122,14 +91,14 @@ Ensure you have the following installed:
      ```
 
 4. **Running the Server**:
-   The server will automatically fetch movies from the API if it hasn't done so on the current day.
+   The server will automatically fetch movies from the API if it hasn't done so on the current day and will create associated cinema sessions.
 
    ```bash
    node server/server.js
    ```
 
 5. **Running the Frontend**:
-   Open a new terminal window, navigate to `frontend`, and start the Vue app.
+   Open a new terminal window, navigate to the frontend directory, and start the Vue app.
 
    ```bash
    cd client/cinema-client
@@ -137,31 +106,49 @@ Ensure you have the following installed:
    ```
 
 6. **Access the App**:
-   Visit `http://localhost:8080` in your browser to start using the application.
+   Visit the link given by Vue in your browser to start using the application. (should be on `http://localhost:8080`)
+
+---
+
+## API Endpoints
+
+| Category         | HTTP Method | Endpoint                           | Description                                                 |
+|-------------------|-------------|------------------------------------|-------------------------------------------------------------|
+| **General**       | GET         | `/`                                | Health check: Confirms the server is running.               |
+| **Movies**        | GET         | `/api/movies`                     | Fetch all movies.                                           |
+|                   | GET         | `/api/movies/:id`                 | Fetch a single movie by its ID.                             |
+| **Authentication**| POST        | `/api/auth/register`              | Register a new user.                                        |
+|                   | POST        | `/api/auth/login`                 | Login and receive a JWT token.                              |
+|                   | GET         | `/api/auth/profile`               | Fetch logged-in user profile.                               |
+|                   | POST        | `/api/auth/book-session`          | Book a movie session for a user.                           |
+| **Sessions**      | GET         | `/api/sessions`                   | Fetch all sessions, optionally filter by movie or date.     |
+|                   | POST        | `/api/sessions`                   | Add a new movie session.                                    |
+|                   | POST        | `/api/sessions/:sessionId/reserve`| Reserve seats for a specific session.                       |
+|                   | GET         | `/api/sessions/:sessionId`        | Fetch session details by its ID.                            |
+|                   | DELETE      | `/api/sessions/expired`           | Delete expired sessions.                                    |
+
+---
 
 ## Frontend Components
 
 ### Key Vue Components
 
-1. **Home.vue**: Displays the list of available movies.
-2. **MovieDetails.vue**: Shows details about a selected movie.
-3. **FoodOrder.vue**: Allows users to order food items.
-4. **SeatSelection.vue**: Lets users choose seats for a movie showing.
-5. **Login.vue / Register.vue**: User authentication components.
+1. **Home.vue** : Displays the list of available movies.
+2. **MovieDetails.vue** : Shows details about a selected movie.
+3. **FoodOrder.vue** : Allows users to order food items.
+4. **SeatSelection.vue** : Lets users choose seats for a movie showing.
+5. **Login.vue / Register.vue** : User authentication components.
+
+---
 
 ## Backend Structure
 
 The backend is powered by **Express** with the following setup:
 
-- **server.js**: The main server file, handling routes and database connections.
-- **fetchMovies.js**: Script that fetches movies from an external API to populate MongoDB if there are no movies added today.
+- **server.js** : The main server file, handling routes and database connections.
+- **fetchMovies.js** : Script that fetches movies from an external API to populate MongoDB if there are no movies added today.
+- **Routes** : Each route file should map to specific controllers that contain the business logic for handling requests and responses.
 
-### API Endpoints
+---
 
-| Endpoint           | Method | Description                    |
-|--------------------|--------|--------------------------------|
-| `/api/movies`      | GET    | Fetch all movies              |
-| `/api/movies/:id`  | GET    | Fetch a specific movie        |
-| `/api/user/login`  | POST   | User login                    |
-| `/api/user/register` | POST | User registration             |
-
+This project provides a comprehensive cinema booking solution. Feel free to explore, fork the project and expand upon its functionality!
