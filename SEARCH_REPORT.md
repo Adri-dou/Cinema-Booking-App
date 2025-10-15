@@ -46,13 +46,30 @@ find /home/runner/work/Cinema-Booking-App/Cinema-Booking-App -type f -exec grep 
 
 **No files found** containing the specified copyright notice or assumptions.
 
+### Git Repository Analysis
+
+- **Total Contributors**: 2 (Adri-dou, copilot-swe-agent[bot])
+- **Commits searched**: All commits in all branches
+- **No commits by author "Bertrand"**: Confirmed
+- **No commit messages mentioning "Bertrand"**: Confirmed (except this search report)
+
 ## Repository Files Examined
 
-- All JavaScript files (.js): 11 files
-- All Vue.js files (.vue): Multiple component and view files
-- All Python files (.py): 0 files
-- All Java files (.java): 0 files  
-- All C/C++ files (.cpp, .c, .h): 0 files
+Total source files examined: **32 files**
+
+- JavaScript files (.js): 11 files
+- Vue.js files (.vue): 21 files
+- TypeScript files (.ts, .tsx, .jsx): 0 files
+- Python files (.py): 0 files
+- Java files (.java): 0 files  
+- C/C++ files (.cpp, .c, .h): 0 files
+
+### Additional Searches Performed
+
+1. **Git History Search**: Searched all git commits for mentions of "Bertrand"
+2. **Git Contributors**: Checked all git authors/contributors
+3. **Documentation Files**: Searched all .md, .txt, .json files
+4. **Line-by-line Inspection**: Examined first 20 lines of all 32 source files
 
 ## Conclusion
 
